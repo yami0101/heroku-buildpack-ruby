@@ -89,6 +89,14 @@ WARNING
         @cache.load_without_overwrite public_assets_folder
         @cache.load default_assets_cache
 
+        digest_file = "#{default_assets_cache}/webpacker/last-compilation-digest-production"
+        if File.exist?(digest_file)
+          puts "===========> WEBPACKER DIGEST FILE EXISTS"
+          system "cat #{digest_file}"
+        else
+          puts "===========> NO DIGEST FILE FOUND"
+        end
+
         precompile.invoke(env: rake_env)
 
         if precompile.success?
